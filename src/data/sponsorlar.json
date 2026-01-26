@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "name": "Tech Corp",
+    "logo": "https://via.placeholder.com/200x80/3B82F6/FFFFFF?text=TECH+CORP",
+    "website": "https://techcorp.com",
+    "tier": "platinum"
+  },
+  {
+    "id": 2,
+    "name": "Innovation Labs",
+    "logo": "https://via.placeholder.com/200x80/8B5CF6/FFFFFF?text=INNOVATION",
+    "website": "https://innovationlabs.com",
+    "tier": "gold"
+  },
+  {
+    "id": 3,
+    "name": "AI Solutions",
+    "logo": "https://via.placeholder.com/200x80/10B981/FFFFFF?text=AI+SOLUTIONS",
+    "website": "https://aisolutions.com",
+    "tier": "silver"
+  }
+]

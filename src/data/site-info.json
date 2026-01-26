@@ -1,0 +1,13 @@
+{
+  "clubName": "Uzay Kulübü",
+  "slogan": "Geleceği Birlikte Kodluyoruz",
+  "about": "2016 yılında kurulan kulübümüz, öğrencilerin yazılım, mekanik ve elektrik gibi disiplinler arası projeler yapmalarını sağlıyor",
+  "mission": "Öğrencilere pratik deneyim kazandırmak, takım çalışması ve problem çözme becerilerini geliştirmek, teknoloji dünyasına katkıda bulunmak.",
+  "contact": {
+    "email": "kulup@universite.edu.tr",
+    "phone": "+90 555 555 5555",
+    "address": "Üniversite Kampüsü, Hukuk Fakültesi, Kat -1",
+    "instagram": "https://instagram.com/kulup",
+    "linkedin": "https://linkedin.com/company/kulup"
+  }
+}

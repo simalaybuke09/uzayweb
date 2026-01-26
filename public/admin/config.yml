@@ -1,0 +1,83 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+collections:
+  - name: "ekipler"
+    label: "Ekipler"
+    files:
+      - label: "Takımlar"
+        name: "teams"
+        file: "src/data/ekipler.json"
+        fields:
+          - label: "Takımlar"
+            name: "teams"
+            widget: "list"
+            fields:
+              - { label: "ID", name: "id", widget: "number" }
+              - { label: "Takım Adı", name: "name", widget: "string" }
+              - { label: "Kaptan", name: "captain", widget: "string" }
+              - { label: "Kaptan Fotoğrafı URL", name: "captainImage", widget: "string" }
+              - { label: "Açıklama", name: "description", widget: "text" }
+              - { label: "Üye Sayısı", name: "members", widget: "number" }
+              - { label: "Başarı Sayısı", name: "achievements", widget: "number" }
+
+  - name: "basarilar"
+    label: "Başarılar"
+    files:
+      - label: "Başarılar Listesi"
+        name: "achievements"
+        file: "src/data/basarilar.json"
+        fields:
+          - label: "Başarılar"
+            name: "achievements"
+            widget: "list"
+            fields:
+              - { label: "ID", name: "id", widget: "number" }
+              - { label: "Başlık", name: "title", widget: "string" }
+              - { label: "Tarih", name: "date", widget: "datetime" }
+              - { label: "Ödül", name: "award", widget: "string" }
+              - { label: "Açıklama", name: "description", widget: "text" }
+              - { label: "Görsel URL", name: "image", widget: "string" }
+              - { label: "Takım", name: "team", widget: "string" }
+
+  - name: "sponsorlar"
+    label: "Sponsorlar"
+    files:
+      - label: "Sponsor Listesi"
+        name: "sponsors"
+        file: "src/data/sponsorlar.json"
+        fields:
+          - label: "Sponsorlar"
+            name: "sponsors"
+            widget: "list"
+            fields:
+              - { label: "ID", name: "id", widget: "number" }
+              - { label: "Sponsor Adı", name: "name", widget: "string" }
+              - { label: "Logo URL", name: "logo", widget: "string" }
+              - { label: "Website", name: "website", widget: "string", required: false }
+              - { label: "Tier", name: "tier", widget: "select", options: ["platinum", "gold", "silver"] }
+
+  - name: "settings"
+    label: "Site Ayarları"
+    files:
+      - label: "Genel Ayarlar"
+        name: "general"
+        file: "src/data/site-info.json"
+        fields:
+          - { label: "Kulüp Adı", name: "clubName", widget: "string" }
+          - { label: "Slogan", name: "slogan", widget: "string" }
+          - { label: "Hakkımızda", name: "about", widget: "text" }
+          - { label: "Misyon", name: "mission", widget: "text" }
+          - label: "İletişim"
+            name: "contact"
+            widget: "object"
+            fields:
+              - { label: "E-posta", name: "email", widget: "string" }
+              - { label: "Telefon", name: "phone", widget: "string" }
+              - { label: "Adres", name: "address", widget: "text" }
+              - { label: "Instagram", name: "instagram", widget: "string" }
+              - { label: "LinkedIn", name: "linkedin", widget: "string" }
