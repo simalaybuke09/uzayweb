@@ -82,8 +82,8 @@ export default function IletisimPage() {
             <div className="space-y-4">
               <Link
                 href={`mailto:${siteInfo.contact.email}`}
-                className="flex items-start gap-4 bg-slate-900 border border-slate-800 p-6 rounded-xl hover:border-blue-500 transition group">
-              </Link>
+                className="flex items-start gap-4 bg-slate-900 border border-slate-800 p-6 rounded-xl hover:border-blue-500 transition group"
+              >
                 <div className="bg-blue-600 p-3 rounded-lg group-hover:scale-110 transition">
                   <Mail size={24} className="text-white" />
                 </div>
@@ -91,10 +91,11 @@ export default function IletisimPage() {
                   <h3 className="text-white font-semibold mb-1">E-posta</h3>
                   <p className="text-slate-400">{siteInfo.contact.email}</p>
                 </div>
+              </Link>
               <Link
                 href={`tel:${siteInfo.contact.phone}`}
                 className="flex items-start gap-4 bg-slate-900 border border-slate-800 p-6 rounded-xl hover:border-blue-500 transition group"
-              ></Link>
+              >
                 <div className="bg-blue-600 p-3 rounded-lg group-hover:scale-110 transition">
                   <Phone size={24} className="text-white" />
                 </div>
@@ -102,6 +103,7 @@ export default function IletisimPage() {
                   <h3 className="text-white font-semibold mb-1">Telefon</h3>
                   <p className="text-slate-400">{siteInfo.contact.phone}</p>
                 </div>
+              </Link>
               
 
               <div className="flex items-start gap-4 bg-slate-900 border border-slate-800 p-6 rounded-xl">
