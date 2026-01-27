@@ -8,7 +8,7 @@ export const metadata = {
 
 export default function BasarilarPage() {
   // Tarihe göre sırala (en yeni önce)
-  const sortedBasarilar = [...basarilar].sort(
+  const sortedBasarilar = [...basarilar.achievements].sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );
 
@@ -28,19 +28,19 @@ export default function BasarilarPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
           <div className="bg-gradient-to-br from-yellow-600 to-yellow-700 rounded-xl p-6 text-center">
             <div className="text-4xl font-bold text-white mb-2">
-              {basarilar.filter(b => b.award.includes("Birincilik")).length}
+              {basarilar.achievements.filter(b => b.award.includes("Birincilik")).length}
             </div>
             <div className="text-yellow-100">Birincilik</div>
           </div>
           <div className="bg-gradient-to-br from-slate-600 to-slate-700 rounded-xl p-6 text-center">
             <div className="text-4xl font-bold text-white mb-2">
-              {basarilar.filter(b => b.award.includes("İkincilik")).length}
+              {basarilar.achievements.filter(b => b.award.includes("İkincilik")).length}
             </div>
             <div className="text-slate-100">İkincilik</div>
           </div>
           <div className="bg-gradient-to-br from-orange-700 to-orange-800 rounded-xl p-6 text-center">
             <div className="text-4xl font-bold text-white mb-2">
-              {basarilar.filter(b => b.award.includes("Üçüncülük")).length}
+              {basarilar.achievements.filter(b => b.award.includes("Üçüncülük")).length}
             </div>
             <div className="text-orange-100">Üçüncülük</div>
           </div>

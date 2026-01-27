@@ -8,9 +8,9 @@ export const metadata = {
 };
 
 export default function SponsorlarPage() {
-  const platinumSponsors = sponsorlar.filter(s => s.tier === "platinum");
-  const goldSponsors = sponsorlar.filter(s => s.tier === "gold");
-  const silverSponsors = sponsorlar.filter(s => s.tier === "silver");
+  const platinumSponsors = sponsorlar.sponsors.filter(s => s.tier === "platinum");
+  const goldSponsors = sponsorlar.sponsors.filter(s => s.tier === "gold");
+  const silverSponsors = sponsorlar.sponsors.filter(s => s.tier === "silver");
 
   return (
     <main className="min-h-screen bg-slate-950 pt-24 pb-16">
