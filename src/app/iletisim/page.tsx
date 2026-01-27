@@ -4,6 +4,10 @@ import { useState } from "react";
 import siteInfo from "@/data/site-info.json";
 import Link from "next/link";
 
+import { Forminit } from "forminit";
+// [2] Forminit örneğini oluştur (Proxy URL'yi belirt)
+const forminit = new Forminit({ proxyUrl: '/api/forminit' });
+
 export default function IletisimPage() {
   const [formData, setFormData] = useState({
     name: "",
@@ -18,23 +22,27 @@ export default function IletisimPage() {
     setStatus("sending");
 
     try {
-      // Formspree veya Getform endpoint'inizi buraya ekleyin
-      const response = await fetch("https://formspree.io/f/YOUR_FORM_ID", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const form = e.currentTarget;
+      const dataToSend = new FormData();
+      
+      // Forminit'in beklediği prefixleri ekleyerek veriyi hazırla
+      dataToSend.append('fi-sender-name', formData.name);
+      dataToSend.append('fi-sender-email', formData.email);
+      dataToSend.append('fi-text-subject', formData.subject);
+      dataToSend.append('fi-text-message', formData.message);
 
-      if (response.ok) {
+      // [3] Forminit üzerinden gönder (ID'ni buraya yaz)
+      const { error } = await forminit.submit('5i9gj4mjbel', dataToSend);
+
+      if (!error) {
         setStatus("success");
         setFormData({ name: "", email: "", subject: "", message: "" });
         setTimeout(() => setStatus("idle"), 5000);
       } else {
-        setStatus("error");
+        throw new Error(error.message);
       }
     } catch (error) {
+      console.error("Form gönderim hatası:", error);
       setStatus("error");
       setTimeout(() => setStatus("idle"), 5000);
     }
@@ -72,10 +80,10 @@ export default function IletisimPage() {
 
             {/* Contact Cards */}
             <div className="space-y-4">
-                <Link href={`mailto:${siteInfo.contact.email}`}
-                    className="flex items-start gap-4 bg-slate-900 border border-slate-800 p-6 rounded-xl hover:border-blue-500 transition group">
-                </Link>
-                
+              <Link
+                href={`mailto:${siteInfo.contact.email}`}
+                className="flex items-start gap-4 bg-slate-900 border border-slate-800 p-6 rounded-xl hover:border-blue-500 transition group">
+              </Link>
                 <div className="bg-blue-600 p-3 rounded-lg group-hover:scale-110 transition">
                   <Mail size={24} className="text-white" />
                 </div>
@@ -83,13 +91,10 @@ export default function IletisimPage() {
                   <h3 className="text-white font-semibold mb-1">E-posta</h3>
                   <p className="text-slate-400">{siteInfo.contact.email}</p>
                 </div>
-
-              <Link href={`tel:${siteInfo.contact.phone}`}
-                className="flex items-start gap-4 bg-slate-900 border border-slate-800 p-6 rounded-xl hover:border-blue-500 transition group"></Link>
-            
-              
-                
-              
+              <Link
+                href={`tel:${siteInfo.contact.phone}`}
+                className="flex items-start gap-4 bg-slate-900 border border-slate-800 p-6 rounded-xl hover:border-blue-500 transition group"
+              ></Link>
                 <div className="bg-blue-600 p-3 rounded-lg group-hover:scale-110 transition">
                   <Phone size={24} className="text-white" />
                 </div>
@@ -210,20 +215,20 @@ export default function IletisimPage() {
 
               {status === "success" && (
                 <div className="bg-green-600/20 border border-green-600 text-green-400 px-4 py-3 rounded-lg">
-                  Mesajınız başarıyla gönderildi! En kısa sürede size dönüş yapacağız.
+                  ✅ Mesajınız başarıyla gönderildi! En kısa sürede size dönüş yapacağız.
                 </div>
               )}
 
               {status === "error" && (
                 <div className="bg-red-600/20 border border-red-600 text-red-400 px-4 py-3 rounded-lg">
-                  Bir hata oluştu. Lütfen daha sonra tekrar deneyin veya e-posta ile iletişime geçin.
+                  ❌ Bir hata oluştu. Lütfen daha sonra tekrar deneyin veya e-posta ile iletişime geçin.
                 </div>
               )}
             </form>
           </div>
         </div>
 
-        {/* Map Section (Optional) */}
+        {/* Map Section */}
         <div className="mt-16">
           <h2 className="text-3xl font-bold text-white mb-8 text-center">Konumumuz</h2>
           <div className="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden h-96">
@@ -237,9 +242,6 @@ export default function IletisimPage() {
               referrerPolicy="no-referrer-when-downgrade"
             />
           </div>
-          <p className="text-center text-slate-400 mt-4 text-sm">
-            * Haritadaki konum örnek amaçlıdır. Gerçek konumunuzu ekleyebilirsiniz.
-          </p>
         </div>
       </div>
     </main>
