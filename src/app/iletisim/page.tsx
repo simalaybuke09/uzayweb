@@ -17,21 +17,22 @@ export default function IletisimPage() {
   });
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus("sending");
 
     try {
-      const form = e.currentTarget;
       const dataToSend = new FormData();
       
-      // Forminit'in beklediği prefixleri ekleyerek veriyi hazırla
-      dataToSend.append('fi-sender-name', formData.name);
+      // Forminit'in "sender" bloğu için beklediği doğru anahtarlar:
+      // 'name' yerine 'fi-sender-firstName' (veya lastName) kullanmalısın
+      dataToSend.append('fi-sender-firstName', formData.name); 
       dataToSend.append('fi-sender-email', formData.email);
+      
+      // Mesaj ve konu için "text" bloğu kullanılır
       dataToSend.append('fi-text-subject', formData.subject);
       dataToSend.append('fi-text-message', formData.message);
 
-      // [3] Forminit üzerinden gönder (ID'ni buraya yaz)
       const { error } = await forminit.submit('5i9gj4mjbel', dataToSend);
 
       if (!error) {
@@ -44,7 +45,6 @@ export default function IletisimPage() {
     } catch (error) {
       console.error("Form gönderim hatası:", error);
       setStatus("error");
-      setTimeout(() => setStatus("idle"), 5000);
     }
   };
 
