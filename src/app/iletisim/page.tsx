@@ -3,10 +3,10 @@ import { Mail, Phone, MapPin, Send } from "lucide-react";
 import { useState } from "react";
 import siteInfo from "@/data/site-info.json";
 import Link from "next/link";
-
 import { Forminit } from "forminit";
 // [2] Forminit örneğini oluştur (Proxy URL'yi belirt)
 const forminit = new Forminit({ proxyUrl: '/api/forminit' });
+
 
 export default function IletisimPage() {
   const [formData, setFormData] = useState({
@@ -17,37 +17,43 @@ export default function IletisimPage() {
   });
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setStatus("sending");
+ const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setStatus("sending");
 
-    try {
-      const dataToSend = new FormData();
-      
-      // Forminit'in "sender" bloğu için beklediği doğru anahtarlar:
-      // 'name' yerine 'fi-sender-firstName' (veya lastName) kullanmalısın
-      dataToSend.append('fi-sender-firstName', formData.name); 
-      dataToSend.append('fi-sender-email', formData.email);
-      
-      // Mesaj ve konu için "text" bloğu kullanılır
-      dataToSend.append('fi-text-subject', formData.subject);
-      dataToSend.append('fi-text-message', formData.message);
+  try {
+    // JSON yerine FormData objesi oluşturuyoruz
+    const formDataToSend = new FormData();
+    formDataToSend.append("fi-form-id", "5i9gj4mjbel");
+    formDataToSend.append("fi-sender-firstName", formData.name);
+    formDataToSend.append("fi-sender-email", formData.email);
+    formDataToSend.append("fi-text-subject", formData.subject);
+    formDataToSend.append("fi-text-message", formData.message);
 
-      const { error } = await forminit.submit('5i9gj4mjbel', dataToSend);
+    const response = await fetch("https://api.forminit.com/f/5i9gj4mjbel", {
+      method: "POST",
+      // FormData kullanırken Content-Type header'ı ekleme, tarayıcı otomatik ayarlar
+      headers: {
+        "Accept": "application/json",
+      },
+      body: formDataToSend,
+    });
 
-      if (!error) {
-        setStatus("success");
-        setFormData({ name: "", email: "", subject: "", message: "" });
-        setTimeout(() => setStatus("idle"), 5000);
-      } else {
-        throw new Error(error.message);
-      }
-    } catch (error) {
-      console.error("Form gönderim hatası:", error);
+    const result = await response.json();
+
+    if (response.ok && result.success) {
+      setStatus("success");
+      setFormData({ name: "", email: "", subject: "", message: "" });
+      setTimeout(() => setStatus("idle"), 5000);
+    } else {
+      console.error("Forminit Yanıtı:", result);
       setStatus("error");
     }
-  };
-
+  } catch (error) {
+    console.error("Bağlantı Hatası:", error);
+    setStatus("error");
+  }
+};
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
       ...formData,
