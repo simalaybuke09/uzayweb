@@ -3,9 +3,6 @@ import { Mail, Phone, MapPin, Send } from "lucide-react";
 import { useState } from "react";
 import siteInfo from "@/data/site-info.json";
 import Link from "next/link";
-import { Forminit } from "forminit";
-// [2] Forminit örneğini oluştur (Proxy URL'yi belirt)
-const forminit = new Forminit({ proxyUrl: '/api/forminit' });
 
 
 export default function IletisimPage() {

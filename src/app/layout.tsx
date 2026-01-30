@@ -19,13 +19,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="tr">
-      <head>
+      <body className={inter.className}>
         <Script
           src="https://identity.netlify.com/v1/netlify-identity-widget.js"
           strategy="beforeInteractive"
         />
-      </head>
-      <body className={inter.className}>
         <Navbar />
         {children}
         <Footer />
