@@ -12,7 +12,7 @@ export default function Home() {
         
         <div className="max-w-6xl mx-auto text-center relative z-10">
           <h1 className="text-5xl md:text-7xl font-extrabold text-white mb-6 leading-tight">
-            {siteInfo.slogan.split(" ").map((word, i) => (
+            {siteInfo.slogan?.split(" ").map((word, i) => (
               <span key={i}>
                 {word === "Birlikte" ? (
                   <span className="text-blue-500">{word}</span>

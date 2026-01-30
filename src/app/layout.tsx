@@ -5,7 +5,7 @@ import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import Script from "next/script";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"], display: "swap" });
 
 export const metadata: Metadata = {
   title: "Otonom Sistemler Kulübü",
@@ -22,7 +22,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <Script
           src="https://identity.netlify.com/v1/netlify-identity-widget.js"
-          strategy="beforeInteractive"
+          strategy="afterInteractive"
         />
         <Navbar />
         {children}
