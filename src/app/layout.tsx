@@ -1,9 +1,11 @@
+// layout.tsx dosyanın güncel hali böyle olmalı:
+
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
-import Script from "next/script";
+// Script importunu şimdilik kullanmayacağımız için silebilirsin
 
 const inter = Inter({ subsets: ["latin"], display: "swap" });
 
@@ -20,26 +22,12 @@ export default function RootLayout({
   return (
     <html lang="tr">
       <body className={inter.className}>
-        <Script
-          src="https://identity.netlify.com/v1/netlify-identity-widget.js"
-          strategy="afterInteractive"
-        />
+        {/* 1. SİLİNDİ: Netlify Identity Widget Scripti */}
         <Navbar />
         {children}
         <Footer />
-        <Script id="netlify-identity-redirect" strategy="lazyOnload">
-          {`
-            if (window.netlifyIdentity) {
-              window.netlifyIdentity.on("init", user => {
-                if (!user) {
-                  window.netlifyIdentity.on("login", () => {
-                    document.location.href = "/admin/";
-                  });
-                }
-              });
-            }
-          `}
-        </Script>
+        {/* 2. SİLİNDİ: netlify-identity-redirect Scripti */}
+        {/* Bu script sonsuz döngüye girip bağlantıyı koparıyor */}
       </body>
     </html>
   );
