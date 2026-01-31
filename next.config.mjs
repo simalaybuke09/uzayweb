@@ -1,5 +1,4 @@
-import type { NextConfig } from "next";
-
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
     unoptimized: true,
@@ -16,9 +15,8 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'placehold.co',
       },
-
     ],
   },
-} satisfies NextConfig;
+};
 
 export default nextConfig;
