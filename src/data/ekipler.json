@@ -4,7 +4,7 @@
       "id": 1,
       "name": "Sabit Kanat İHA Takımı",
       "captain": "Burak Kahraman",
-      "captainImage": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop",
+      "captainImage": "/images/resim.png",
       "description": "İnsansız Hava Araçları geliştiren ve yarışmalara katılan takımımız.",
       "members": 12,
       "achievements": 3
@@ -13,7 +13,7 @@
       "id": 2,
       "name": "Döner Kanat İHA Takımı",
       "captain": "Anıl Furkan Çaldağı",
-      "captainImage": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop",
+      "captainImage": "/images/resim.png",
       "description": "Görüntü işleme ve makine öğrenmesi projeleri geliştiren ekibimiz.",
       "members": 8,
       "achievements": 5

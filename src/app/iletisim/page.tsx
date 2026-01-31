@@ -19,7 +19,6 @@ export default function IletisimPage() {
   setStatus("sending");
 
   try {
-    // JSON yerine FormData objesi oluşturuyoruz
     const formDataToSend = new FormData();
     formDataToSend.append("fi-form-id", "5i9gj4mjbel");
     formDataToSend.append("fi-sender-firstName", formData.name);
@@ -29,7 +28,6 @@ export default function IletisimPage() {
 
     const response = await fetch("https://api.forminit.com/f/5i9gj4mjbel", {
       method: "POST",
-      // FormData kullanırken Content-Type header'ı ekleme, tarayıcı otomatik ayarlar
       headers: {
         "Accept": "application/json",
       },
